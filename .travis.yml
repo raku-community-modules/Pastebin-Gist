@@ -1,0 +1,9 @@
+language: perl6
+perl6:
+    - latest
+
+install:
+    - rakudobrew build-panda
+    - panda install LWP::Simple
+    - panda install URI::Encode
+    - panda install HTML::Entity
