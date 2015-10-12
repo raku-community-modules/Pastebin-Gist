@@ -101,7 +101,7 @@ have this blurb in them:
     This is the format of the automatic naming scheme that
     Gist uses internally.
 
-It tells you not to use files C<gistfile3> or C<gistfiles33.txt>. Behaviour
+It tells you not to use files C<gistfile3> or C<gistfile33.txt>. Behaviour
 when using this types of values for C<filename> is not defined.
 
 =head2 C<fetch>
