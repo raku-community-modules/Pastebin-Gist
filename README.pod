@@ -91,7 +91,7 @@ B<Defaults to:> C<False>.
     filename => "Foo.p6"
 
 B<Optional>. Applies only when the first positional argument to
-C<paste/paste> is a string. Specifies the filename to use for your gist
+C<paste|/paste> is a string. Specifies the filename to use for your gist
 (affects syntax highlighting). B<Defaults to:> C<nopaste.txt>.
 
 Note: GitHub's API docs have this blurb in them:
