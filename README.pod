@@ -91,10 +91,11 @@ B<Defaults to:> C<False>.
     filename => "Foo.p6"
 
 B<Optional>. Applies only when the first positional argument to
-C</paste> is a string. Specifies the filename to use for your gist
+L</paste> is a string. Specifies the filename to use for your gist
 (affects syntax highlighting). B<Defaults to:> C<nopaste.txt>.
 
-Note: GitHub's API docs have this blurb in them:
+Note: L<GitHub's API docs|https://developer.github.com/v3/gists/#create-a-gist>
+have this blurb in them:
 
     Don't name your files "gistfile" with a numerical suffix.
     This is the format of the automatic naming scheme that
