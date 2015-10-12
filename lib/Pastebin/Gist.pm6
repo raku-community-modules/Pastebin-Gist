@@ -1,49 +1,46 @@
 unit class Pastebin::Gist:version<1.001001>;
 
-use LWP::Simple;
-use URI::Encode;
+use HTTP::Tinyish;
 
-constant API-URL   = 'http://api.github.com/gists';
+constant API-URL   = 'https://api.github.com/';
 constant PASTE-URL = 'https://gist.github.com/';
 
-subset ValidGistToken      of Str where /:i <[a..f 0..9]> ** 40/;
-subset ValidGistIndentSize of Int where any(2, 4, 8);
-subset ValidGistIndentType of Str where any(<tabs spaces>);
-subset ValidGistWrapMethod of Str where any(<no soft>);
-
-has ValidGistToken      $.token        = %*ENV<PASTEBIN_GIST_TOKEN>;
-has ValidGistIndentSize $.indent       = 4;
-has ValidGistIndentType $.indent-type  = 'spaces';
-has ValidGistWrapMethod $.wrap         = 'no';
+subset ValidGistToken of Str where /:i <[a..f 0..9]> ** 40/;
+has ValidGistToken $.token = %*ENV<PASTEBIN_GIST_TOKEN>;
 
 method paste (
-    Str   $paste,
+    $paste,
     Str  :$desc     = '',
-    Str  :$filename = 'gistfile1.txt',
-    Bool :$public   = False
+    Str  :$filename = 'nopaste.txt',
+    Bool :$public   = False,
 ) returns Str {
-    my %content =
-        public      => $public,
-        description => $desc,
-        files       => { $filename => { content => $paste } };
+    my %content = public      => $public,
+                  description => $desc,
+                  files       => $paste ~~ Hash
+                                    ?? $paste
+                                    !! { $filename => { content => $paste } };
 
-say %content.perl;
-
-    say API-URL;
-    say to-json %content;
-    say  'Authorization=' ~ uri_encode_component( "token $!token"    )
-   ~ 'Content='       ~ uri_encode_component( to-json %content   )
-   ~ 'Content_Type='  ~ uri_encode_component( 'application/json' );
-
-    my $res = LWP::Simple.new.post( API-URL, {},
-              'Authorization=' ~ uri_encode_component( "token $!token"    )
-            ~ 'Content='       ~ uri_encode_component( to-json %content   )
-            ~ 'Content_Type='  ~ uri_encode_component( 'application/json' )
+    my $res = HTTP::Tinyish.new.post( API-URL ~ 'gists',
+        headers => {
+            Authorization => "token $!token",
+            Content-Type  => 'application/json',
+        },
+        content => to-json %content,
     );
 
-    return PASTE-URL ~ from-json( $res ).<id>;
+    return PASTE-URL ~ from-json( $res.<content> ).<id>;
 }
 
-method fetch ($what) returns List {
+method fetch ($what is copy) returns List {
+    $what = $what.split('/').[*-1];
 
+    my $res = from-json
+        HTTP::Tinyish.new.get( API-URL ~ "gists/$what" ).<content>;
+
+    my %files;
+    for $res.<files>.keys {
+        %files{$_} = $res.<files>{$_}<content>;
+    }
+
+    return ( %files, $res.<description> );
 }

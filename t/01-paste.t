@@ -4,20 +4,24 @@ use Test;
 use lib 'lib';
 use Pastebin::Gist;
 
-my $p = Pastebin::Gist.new;
-my $paste_url = $p.paste("Perl 6 Module Test<p>\n& <pre>foo", 'My Summary <>&');
-ok $paste_url ~~ /^^ 'http://fpaste.scsys.co.uk/'  \d+ $$/,
+my $p = Pastebin::Gist.new(
+    token => '3f2b4ca292960fafc63fb6798f148e3b47ea9bad',
+);
+my $paste_url = $p.paste(
+    "Perl 6 Module Test<p>\n& <pre>foo",
+    desc => 'My Summary <>&',
+);
+ok $paste_url ~~ /^ 'https://gist.github.com/' <[\w]>+ $/,
     "Paste URL [$paste_url] is sane";
 
-my ( $content, $summary ) = $p.fetch( $paste_url );
-is $content, "Perl 6 Module Test<p>\n& <pre>foo", 'Retrieved content is good';
-is $summary, 'My Summary <>&', 'Retrieved summary is good';
+my ( $files, $desc ) = $p.fetch( $paste_url );
+is $desc, 'My Summary <>&', 'Retrieved description is good';
+for keys $files {
+    is $_, 'nopaste.txt', 'Paste filename is sane';
+    is $files.{$_}, "Perl 6 Module Test<p>\n& <pre>foo",
+        'Paste content is sane';
 
-( $content, $summary ) = $p.fetch( ($paste_url ~~ /(\d+)/)[0] );
-is $content, "Perl 6 Module Test<p>\n& <pre>foo",
-    'Retrieved content is good when using paste ID only';
-is $summary, 'My Summary <>&',
-    'Retrieved summary is good when using paste ID only';
+}
 
 done-testing;
 
@@ -26,4 +30,4 @@ done-testing;
 GitHub testing account:
 Login: perl6-tester
 Pass: tester-perl6
-Token: 4c6567f85f0980f30987b69b69767647c2165a26
+Token: 3f2b4ca292960fafc63fb6798f148e3b47ea9bad

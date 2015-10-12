@@ -3,16 +3,22 @@
 use lib 'lib';
 use Pastebin::Gist;
 
-
-my $p = Pastebin::Gist.new(
-    token => '4c6567f85f0980f30987b69b69767647c2165a26'
-);
+my $p = Pastebin::Gist.new;
 
 say "Pasting test content...";
-my $paste_url = $p.paste('<pre>test paste1</pre>');
+my $paste_url = $p.paste(
+    {
+        foo => { content => "<pre>test paste1</pre>" },
+        bar => { content => "meow!" }
+    },
+    desc => "Foo Bar"
+);
 say "Paste is located at $paste_url";
 
-# say "Retrieiving paste content...";
-# my ( $content, $summary ) = get_paste($paste_url);
-# say "Summary: $summary";
+say "Retrieiving paste content...";
+my ( $files, $summary ) = $p.fetch( $paste_url );
+say "Summary: $summary";
+for $files.keys {
+    say "File: $_\nContent:\n$files{$_}";
+}
 # say "Content: $content";
