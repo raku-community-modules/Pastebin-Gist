@@ -82,7 +82,7 @@ not specified.
 
     public => True,
 
-B<Optional>. Takes C<True> or C<False> values. If set to `True`, your
+B<Optional>. Takes C<True> or C<False> values. If set to C<True>, your
 gist will be visible in search results and I<recent gists> page.
 B<Defaults to:> C<False>.
 
