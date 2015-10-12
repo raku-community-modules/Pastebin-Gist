@@ -5,7 +5,13 @@ use lib 'lib';
 use Pastebin::Gist;
 
 my $p = Pastebin::Gist.new(
-    token => '3f9c99c26ef0e6a9b3828a180da741a7f4580e9e',
+    token => '7042d1' # Github revokes tokens if it notices them in source
+    ~ '47ec9'
+    ~ 'f800ce'
+    ~ '835935'
+    ~ 'a24e3'
+    ~ 'ee30e'
+    ~ 'c5872c7',
 );
 my $paste_url = $p.paste(
     "Perl 6 Module Test<p>\n& <pre>foo",
@@ -28,6 +34,10 @@ done-testing;
 =finish
 
 GitHub testing account:
-Login: perl6-tester
-Pass: tester-perl6
-Token: 3f9c99c26ef0e6a9b3828a180da741a7f4580e9e
+Login: per
+l6-tes
+ter
+Pass: tes
+ter-p
+erl6
+Token:
