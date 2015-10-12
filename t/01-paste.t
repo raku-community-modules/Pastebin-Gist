@@ -5,7 +5,7 @@ use lib 'lib';
 use Pastebin::Gist;
 
 my $p = Pastebin::Gist.new(
-    token => '3f2b4ca292960fafc63fb6798f148e3b47ea9bad',
+    token => '3f9c99c26ef0e6a9b3828a180da741a7f4580e9e',
 );
 my $paste_url = $p.paste(
     "Perl 6 Module Test<p>\n& <pre>foo",
@@ -30,4 +30,4 @@ done-testing;
 GitHub testing account:
 Login: perl6-tester
 Pass: tester-perl6
-Token: 3f2b4ca292960fafc63fb6798f148e3b47ea9bad
+Token: 3f9c99c26ef0e6a9b3828a180da741a7f4580e9e
