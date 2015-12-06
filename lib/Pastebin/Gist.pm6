@@ -1,5 +1,5 @@
+no precompilation;
 unit class Pastebin::Gist:ver<1.001001>;
-
 use HTTP::Tinyish;
 
 constant API-URL   = 'https://api.github.com/';
