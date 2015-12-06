@@ -1,4 +1,3 @@
-no precompilation;
 use HTTP::Tinyish;
 unit class Pastebin::Gist:ver<1.001001>;
 
