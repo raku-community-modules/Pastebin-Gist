@@ -9,7 +9,7 @@ subset ValidGistToken of Str where /:i <[a..f 0..9]> ** 40/;
 has ValidGistToken $.token = %*ENV<PASTEBIN_GIST_TOKEN>;
 
 BEGIN WWW.^ver
-    andthen $_ >= v1.004001 orelse die 'Need WWW.pm6 version 1.004001 or newer';
+    andthen $_ >= v1.004001 or die 'Need WWW.pm6 version 1.004001 or newer';
 
 method paste (
     $paste,
