@@ -2,8 +2,11 @@ use WWW;
 use JSON::Fast;
 unit class Pastebin::Gist;
 
+class X is Exception { has $.message }
+
 constant API-URL   = 'https://api.github.com/';
 constant PASTE-URL = 'https://gist.github.com/';
+constant %UA       = :User-Agent('Rakudo Pastebin::Gist');
 
 subset ValidGistToken of Str where /:i <[a..f 0..9]> ** 40/;
 has ValidGistToken $.token = %*ENV<PASTEBIN_GIST_TOKEN>;
@@ -24,20 +27,22 @@ method paste (
                                     !! { $filename => { content => $paste } };
 
     my $res = jpost API-URL ~ 'gists', %content.&to-json,
-            :Authorization("token $!token"), :Content-Type<application/json>,
-            :User-Agent('Rakudo Pastebin::Gist')
-    orelse die "Error communicating with GitHub: {.exception.message}";
+        |%UA, :Authorization("token $!token"), :Content-Type<application/json>
+    orelse die X.new: :message(.exception.message);
 
     return PASTE-URL ~ $res<id>;
 }
 
 method fetch ($what) returns List {
-    my $res = jget API-URL ~ "gists/$what.split('/').tail()",
-        :User-Agent('Rakudo Pastebin::Gist')
-    orelse die "Error communicating with GitHub: {.exception.message}";
-
-    my %files;
-    %files{$_} = $res<files>{$_}<content> for $res<files>:v.keys;
-
-    return %files, $res<description>;
+    with jget API-URL ~ "gists/$what.split('/').tail()", |%UA -> $res {
+        my %files;
+        %files{$_} = $res.<files>{$_}<content> for $res<files>:v.keys;
+        return %files, $res<description>;
+    }
+    else -> $_ {
+        when *.exception.message.contains: 'Error 404' {
+            die X.new: :message<404 paste not found>;
+        }
+        die X.new: :message(.exception.message);
+    }
 }
