@@ -2,9 +2,9 @@
     "perl"         : "6.c",
     "name"         : "Pastebin::Gist",
     "license"      : "Artistic-2.0",
-    "version"      : "1.001003",
+    "version"      : "1.002001",
     "description"  : "Use https://gist.github.com/ as a pastebin",
-    "depends"      : [ "HTTP::Tinyish", "JSON::Fast" ],
+    "depends"      : [ "WWW", "JSON::Fast" ],
     "test-depends" : [ "Test" ],
     "provides"     : {
         "Pastebin::Gist" : "lib/Pastebin/Gist.pm6"

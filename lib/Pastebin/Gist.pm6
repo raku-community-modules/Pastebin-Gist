@@ -1,12 +1,15 @@
-use HTTP::Tinyish;
+use WWW;
 use JSON::Fast;
-unit class Pastebin::Gist:ver<1.001001>;
+unit class Pastebin::Gist;
 
 constant API-URL   = 'https://api.github.com/';
 constant PASTE-URL = 'https://gist.github.com/';
 
 subset ValidGistToken of Str where /:i <[a..f 0..9]> ** 40/;
 has ValidGistToken $.token = %*ENV<PASTEBIN_GIST_TOKEN>;
+
+BEGIN WWW.^ver
+    andthen $_ >= v1.004001 orelse die 'Need WWW.pm6 version 1.004001 or newer';
 
 method paste (
     $paste,
@@ -20,27 +23,21 @@ method paste (
                                     ?? $paste
                                     !! { $filename => { content => $paste } };
 
-    my $res = HTTP::Tinyish.new.post( API-URL ~ 'gists',
-        headers => {
-            Authorization => "token $!token",
-            Content-Type  => 'application/json',
-        },
-        content => to-json %content,
-    );
+    my $res = jpost API-URL ~ 'gists', %content.&to-json,
+            :Authorization("token $!token"), :Content-Type<application/json>,
+            :User-Agent('Rakudo Pastebin::Gist')
+    orelse die "Error communicating with GitHub: {.exception.message}";
 
-    return PASTE-URL ~ from-json( $res.<content> ).<id>;
+    return PASTE-URL ~ $res<id>;
 }
 
-method fetch ($what is copy) returns List {
-    $what = $what.split('/').[*-1];
-
-    my $res = from-json
-        HTTP::Tinyish.new.get( API-URL ~ "gists/$what" ).<content>;
+method fetch ($what) returns List {
+    my $res = jget API-URL ~ "gists/$what.split('/').tail()",
+        :User-Agent('Rakudo Pastebin::Gist')
+    orelse die "Error communicating with GitHub: {.exception.message}";
 
     my %files;
-    for $res.<files>.keys {
-        %files{$_} = $res.<files>{$_}<content>;
-    }
+    %files{$_} = $res<files>{$_}<content> for $res<files>:v.keys;
 
-    return ( %files, $res.<description> );
+    return %files, $res<description>;
 }
