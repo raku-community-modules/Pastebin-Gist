@@ -41,7 +41,7 @@ method fetch ($what) returns List {
     }
     else -> $_ {
         when *.exception.message.contains: 'Error 404' {
-            die X.new: :message<404 paste not found>;
+            die X.new: :message('404 paste not found');
         }
         die X.new: :message(.exception.message);
     }
