@@ -31,7 +31,7 @@ for keys $files {
 }
 
 throws-like { $p.fetch: 'blahblah' }, Pastebin::Gist::X,
-    'failures throw Pastebin::Gist::X exception';
+    message => /'not found'/, 'failures throw Pastebin::Gist::X exception';
 
 =finish
 
