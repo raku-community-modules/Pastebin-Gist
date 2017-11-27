@@ -18,7 +18,7 @@ Pastebin::Gist - Perl 6 interface to https://gist.github.com/
             'meow.css' => { content => "Paste content 2" },
         },
         :desc("Foo Bar"),
-        :public,
+        :!public,
     );
 
 =head1 DESCRIPTION
