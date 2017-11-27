@@ -17,8 +17,8 @@ Pastebin::Gist - Perl 6 interface to https://gist.github.com/
             'file1.p6' => { content => "Paste content 1" },
             'meow.css' => { content => "Paste content 2" },
         },
-        desc => "Foo Bar",
-        public => 0,
+        :desc("Foo Bar"),
+        :public,
     );
 
 =head1 DESCRIPTION
@@ -59,8 +59,8 @@ C<PASTEBIN_GIST_TOKEN> environmental variable to the value of your token.
             'file1.p6' => { content => "Paste content 1" },
             'meow.css' => { content => "Paste content 2" },
         },
-        desc => 'Optional summary',
-        public => True,
+        :desc('Optional summary'),
+        :public,
     );
 
 B<Returns> URL to the created paste (e.g.
