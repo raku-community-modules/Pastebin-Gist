@@ -141,12 +141,12 @@ full URL to it. On failure, throws `Pastebin::Gist::X` exception whose
 =head1 REPOSITORY
 
 Fork this module on GitHub:
-L<https://github.com/zoffixznet/perl6-Pastebin-Gist>
+L<https://github.com/raku-community-modules/perl6-Pastebin-Gist>
 
 =head1 BUGS
 
 To report bugs or request features, please use
-L<https://github.com/zoffixznet/perl6-Pastebin-Gist/issues>
+L<https://github.com/raku-community-modules/perl6-Pastebin-Gist/issues>
 
 =head1 AUTHOR
 
@@ -154,7 +154,7 @@ Zoffix Znet L<http://zoffix.com/>
 
 =head1 LICENSE
 
-You can use and distribute this module under the same terms as Perl 6
+You can use and distribute this module under the same terms as Raku
 itself. See the C<LICENSE> file included in this distribution for complete
 details.
 
