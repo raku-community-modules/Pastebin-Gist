@@ -37,8 +37,7 @@ throws-like {
         $p.fetch($paste_url);
         done if $n == 60;
     }
-}, Pastebin::Gist::X,
-    :message{ .contains: 'not found' }, 'gist got deleted';
+}, Pastebin::Gist::X, :message{ .contains: 'not found' }, 'gist got deleted';
 
 throws-like { $p.delete: $paste_url }, Pastebin::Gist::X,
     :message{ .contains: 'not found' },
