@@ -33,7 +33,7 @@ for keys $files {
 ok $p.delete($paste_url), 'tried to delete a gist';
 
 throws-like {
-    react whenever Supply.interval(1) -> $n {
+    react whenever Supply.interval(5) -> $n {
         $p.fetch($paste_url);
         done if $n == 60;
     }
