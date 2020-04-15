@@ -31,7 +31,13 @@ for keys $files {
 }
 
 ok $p.delete($paste_url), 'tried to delete a gist';
-throws-like { $p.fetch: $paste_url }, Pastebin::Gist::X,
+
+throws-like {
+    react whenever Supply.interval(1) -> $n {
+        $p.fetch($paste_url);
+        done if $n == 60;
+    }
+}, Pastebin::Gist::X,
     :message{ .contains: 'not found' }, 'gist got deleted';
 
 throws-like { $p.delete: $paste_url }, Pastebin::Gist::X,
