@@ -35,7 +35,7 @@ ok $p.delete($paste_url), 'tried to delete a gist';
 throws-like {
     react whenever Supply.interval(5) -> $n {
         $p.fetch($paste_url);
-        done if $n == 60;
+        done if $n == 12;
     }
 }, Pastebin::Gist::X, :message{ .contains: 'not found' }, 'gist got deleted';
 
