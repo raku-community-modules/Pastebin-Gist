@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-Pastebin::Gist - Perl 6 interface to https://gist.github.com/
+Pastebin::Gist - Raku interface to https://gist.github.com/
 
 =head1 SYNOPSIS
 
@@ -59,11 +59,11 @@ by providing no token.
 =head2 C<paste>
 
     my $paste_url = $p.paste('Paste content');
-    my $paste_url = $p.paste('Paste content', filename => 'foo.p6');
+    my $paste_url = $p.paste('Paste content', filename => 'foo.raku');
     my $paste_url = $p.paste(
         {
-            'file1.p6' => { content => "Paste content 1" },
-            'meow.css' => { content => "Paste content 2" },
+            'file1.raku' => { content => "Paste content 1" },
+            'meow.css'   => { content => "Paste content 2" },
         },
         :desc('Optional summary'),
         :public,
@@ -95,7 +95,7 @@ B<Defaults to:> C<False>.
 
 =head3 C<filename>
 
-    filename => "Foo.p6"
+    filename => "Foo.raku"
 
 B<Optional>. Applies only when the first positional argument to
 L</paste> is a string. Specifies the filename to use for your gist
@@ -141,12 +141,12 @@ full URL to it. On failure, throws `Pastebin::Gist::X` exception whose
 =head1 REPOSITORY
 
 Fork this module on GitHub:
-L<https://github.com/raku-community-modules/perl6-Pastebin-Gist>
+L<https://github.com/raku-community-modules/Pastebin-Gist>
 
 =head1 BUGS
 
 To report bugs or request features, please use
-L<https://github.com/raku-community-modules/perl6-Pastebin-Gist/issues>
+L<https://github.com/raku-community-modules/Pastebin-Gist/issues>
 
 =head1 AUTHOR
 
