@@ -11,5 +11,5 @@
         "Pastebin::Gist::X" : "lib/Pastebin/Gist.pm6"
     },
     "authors"      : ["Zoffix Znet"],
-    "source-url"   : "https://github.com/raku-community-modules/perl6-Pastebin-Gist.git"
+    "source-url"   : "https://github.com/raku-community-modules/Pastebin-Gist.git"
 }
