@@ -1,4 +1,5 @@
-use lib <lib>;
+use v6;
+
 use Test;
 use Pastebin::Gist;
 

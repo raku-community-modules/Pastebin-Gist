@@ -25,7 +25,7 @@ Pastebin::Gist - Raku interface to https://gist.github.com/
 
 =head1 DESCRIPTION
 
-This module allows to paste to create GitHub Gists as retrieve them.
+This module allows the user to create and paste to GitHub Gists as well as retrieve them.
 
 =head1 METHODS
 
@@ -36,14 +36,14 @@ This module allows to paste to create GitHub Gists as retrieve them.
 
     # Set token via an argument:
     my $p = Pastebin::Gist.new(
-        token => '3f2b4ca292960fafc63fb6798f148e3b47ea9fff',
+        token => 'ghp_4ca292960fafc63fb6798f148e3b47ea9fff',
     )
 
 Creates new C<Pastebin::Gist> object. Accepts the following settings:
 
 =head3 C<token>
 
-    token => '3f2b4ca292960fafc63fb6798f148e3b47ea9fff'
+    token => 'ghp_4ca292960fafc63fb6798f148e3b47ea9fff'
 
 To use this module you need to
 L<create a GitHub token|https://github.com/settings/tokens>. Only the C<gist>
@@ -55,6 +55,11 @@ C<PASTEBIN_GIST_TOKEN> environmental variable to the value of your token.
 Also, you can upload
 [anonymous gists](https://help.github.com/articles/about-gists/#anonymous-gists)
 by providing no token.
+
+=head2 Local User Testing
+
+In order to test the module with your token, use the installed executable 'test-pastebin-gist'
+to insure all works before using this module in other programs.
 
 =head2 C<paste>
 

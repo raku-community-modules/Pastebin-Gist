@@ -9,7 +9,10 @@ constant API-URL   = 'https://api.github.com/';
 constant PASTE-URL = 'https://gist.github.com/';
 constant %UA       = :User-Agent('Rakudo Pastebin::Gist');
 
-subset ValidGistToken of Str where /:i <[a..f 0..9]> ** 40/;
+subset ValidGistToken of Str where /:i
+                                       | ghp_ <[a..f 0..9]> ** 36
+                                       | <[a..f 0..9]> ** 40
+                                   /;
 has ValidGistToken $.token = %*ENV<PASTEBIN_GIST_TOKEN> // Nil;
 
 method paste (
