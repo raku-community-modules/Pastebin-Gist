@@ -2,13 +2,13 @@
     "perl"         : "6.c",
     "name"         : "Pastebin::Gist",
     "license"      : "Artistic-2.0",
-    "version"      : "1.004002",
+    "version"      : "1.005",
     "description"  : "Use https://gist.github.com/ as a pastebin",
     "depends"      : [ "WWW", "JSON::Fast" ],
     "test-depends" : [ "Test" ],
     "provides"     : {
-        "Pastebin::Gist" : "lib/Pastebin/Gist.pm6",
-        "Pastebin::Gist::X" : "lib/Pastebin/Gist.pm6"
+        "Pastebin::Gist" : "lib/Pastebin/Gist.rakumod",
+        "Pastebin::Gist::X" : "lib/Pastebin/Gist.rakumod"
     },
     "authors"      : ["Zoffix Znet"],
     "source-url"   : "https://github.com/raku-community-modules/Pastebin-Gist.git"
