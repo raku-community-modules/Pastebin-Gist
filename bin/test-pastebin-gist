@@ -34,3 +34,5 @@ for $files.keys {
     say "File: $_\nContent:\n$files{$_}";
 }
 # say "Content: $content";
+
+# vim: expandtab shiftwidth=4
