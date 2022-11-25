@@ -13,7 +13,7 @@ subset ValidGistToken of Str where /:i
                                        | ghp_ <[a..f 0..9]> ** 36
                                        | <[a..f 0..9]> ** 40
                                    /;
-has ValidGistToken $.token = %*ENV<PASTEBIN_GIST_TOKEN> // Nil;
+has ValidGistToken:D $.token = %*ENV<PASTEBIN_GIST_TOKEN>;
 
 method paste(
     $paste,
@@ -28,8 +28,7 @@ method paste(
                                     !! { $filename => { content => $paste } };
 
     my $res = jpost API-URL ~ 'gists', %content.&to-json,
-        |%UA, :Authorization($!token.defined ?? "token $!token" !! Empty),
-        :Content-Type<application/json>
+        |%UA, :Authorization("token $!token"), :Content-Type<application/json>
     orelse die X.new: :message(.exception.message);
 
     PASTE-URL ~ $res<id>
