@@ -11,7 +11,7 @@ SYNOPSIS
 ```raku
 use Pastebin::Gist;
 my $p = Pastebin::Gist.new(
-    token => '3f2b4ca292960fafc63fb6798f148e3b47ea9fff',
+    token => 'ghp_4ca292960fafc63fb6798f148e3b47ea9fff',
 );
 
 my $paste-url = $p.paste("<foo>bar</foo>");
