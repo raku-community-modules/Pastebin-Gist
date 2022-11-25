@@ -78,18 +78,18 @@ my $p = Pastebin::Gist.new(
     token => '3f2b4ca292960fafc63fb6798f148e3b47ea9fff',
 );
 
-my $paste_url = $p.paste("<foo>bar</foo>");
+my $paste-url = $p.paste("<foo>bar</foo>");
 
-my $paste_url = $p.paste(
+my $paste-url = $p.paste(
     {
-        'file1.p6' => { content => "Paste content 1" },
+        'file1.raku' => { content => "Paste content 1" },
         'meow.css' => { content => "Paste content 2" },
     },
     :desc("Foo Bar"),
     :!public,
 );
 
-$p.delete: $paste_url; # delete a gist
+$p.delete: $paste-url; # delete a gist
 
 =end code
 
@@ -139,9 +139,9 @@ to insure all works before using this module in other programs.
 
 =begin code :lang<raku>
 
-my $paste_url = $p.paste('Paste content');
-my $paste_url = $p.paste('Paste content', filename => 'foo.raku');
-my $paste_url = $p.paste(
+my $paste-url = $p.paste('Paste content');
+my $paste-url = $p.paste('Paste content', filename => 'foo.raku');
+my $paste-url = $p.paste(
     {
         'file1.raku' => { content => "Paste content 1" },
         'meow.css'   => { content => "Paste content 2" },

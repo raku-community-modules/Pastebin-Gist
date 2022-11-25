@@ -19,17 +19,17 @@ if !@*ARGS {
 my $p = Pastebin::Gist.new;
 
 say "Pasting test content...";
-my $paste_url = $p.paste(
+my $paste-url = $p.paste(
     {
         foo => { content => "<pre>test paste1</pre>" },
         bar => { content => "meow!" }
     },
     desc => "Foo Bar"
 );
-say "Paste is located at $paste_url";
+say "Paste is located at $paste-url";
 
 say "Retrieiving paste content...";
-my ( $files, $summary ) = $p.fetch( $paste_url );
+my ( $files, $summary ) = $p.fetch( $paste-url );
 say "Summary: $summary";
 for $files.keys {
     say "File: $_\nContent:\n$files{$_}";
