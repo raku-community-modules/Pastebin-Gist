@@ -1,7 +1,7 @@
 use WWW :extras;
 use JSON::Fast;
 
-unit class Pastebin::Gist:ver<1.006>:auth<zef:raku-community-modules>;
+unit class Pastebin::Gist:ver<1.007>:auth<zef:raku-community-modules>;
 
 class X is Exception { has $.message }
 
