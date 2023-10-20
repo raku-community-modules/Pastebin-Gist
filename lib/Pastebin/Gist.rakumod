@@ -88,6 +88,11 @@ my $paste-url = $p.paste(
     :!public,
 );
 
+my $fetch-url = 'https://gist.github.com/raiph/849a4a9d8875542fb86df2b2eda89296';
+my ($content-hash, $description) = $p.fetch: $fetch-url;
+dd $content-hash; # Hash $content-hash = ${".md" => "Great description of Raku core - the content of file .md - goes here"}
+dd $description; # Str $description = "Raku's \"core\""
+
 $p.delete: $paste-url; # delete a gist
 
 =end code
